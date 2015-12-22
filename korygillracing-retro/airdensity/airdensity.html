@@ -1,0 +1,239 @@
+﻿<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+    <title>Air Density Calculation</title>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-54114972-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+<body background="../images/background/kory250gp-97-background.gif">
+
+    <h1 align="center"><font color="#000000"><em>Air Density Calculation</em></font></h1>
+
+    <p align="center"><font color="#000000"><em>last updated 11/2/99</em></font></p>
+
+    <hr>
+
+    <p>
+        Now that I have started racing 2-stroke motorcycles, I care a bit more about air
+        density than I used to. There are air density gauges available for around $100, but since
+        I already have my HP calculator at the track, I use it to calculate air density.
+    </p>
+
+    <p>
+        I bought a Davis Perception II weather station which gives me Temp, Barometer, and
+        Relative Humidity. From these values, I can calculate air density.
+    </p>
+
+    <p>
+        <em>
+            You are more than welcome to the source code. If you change it, please leave my
+            comments as they are to give credit to those who contributed to it.
+        </em>
+    </p>
+
+    <hr>
+
+    <p><strong>My best work so far, Solution #3 (and simplest yet):</strong></p>
+
+    <p>
+        The numbers produced from these formulas comes within 1% to 2% of the numbers produced
+        by Stephen Bowline's Altalab Instrument Delta-Ace air density gauge (about $450!). &nbsp;
+        Using my calculator, I can &quot;forecast&quot; what effects say a 5 degree rise in temp
+        would cause...something a gauge cannot do.&nbsp; Note, that you want the &quot;percent of
+        Standard Air Density&quot;.
+    </p>
+
+    <p>Here's the formula used:</p>
+
+    <p>
+        StdAirDensity = 1.22556 and is defined at 59.0F degrees,&nbsp; 0.0% humidity, and 29.92
+        inches on the barometer<br>
+        GasConstant=287.0<br>
+        Temp_c&nbsp;&nbsp;&nbsp; = (Temp-32.0) * 5.0 / 9.0;<br>
+        Temp_k&nbsp;&nbsp;&nbsp; = Temp_c + 273.0;<br>
+        Baro_mb = Barometer / (29.92 / 1013.0);<br>
+        Baro_pa = Baro_mb * 100.0;<br>
+        SaturationPressure_mb = 6.11 * pow(10,(7.5*Temp_c)/(237.7+Temp_c));<br>
+        VaporPressure_mb = Humidity * SaturationPressure_mb / 100.0;<br>
+        TempVirtual_k = Temp_k / (1.0 - (VaporPressure_mb/Baro_mb)*(1.-0.622));<br>
+        // D = P/(T*R)<br>
+        AirDensity = Baro_pa / (TempVirtual_k*GasConstant);<br>
+        % Std Density = AirDensity/StdAirDensity*100<br>
+    </p>
+
+    <p>
+        Just so I don't lose the small amount of work I did to program this in my RPN
+        calculator, I have listed my &quot;program&quot; here.
+    </p>
+
+    <p><a href="airdensity_rpncalculator.html">Air Density Calculation (for RPN calculator)</a></p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Source Code:</td>
+            <td><a href="air3/air.cpp">air.cpp</a> (5k)</td>
+        </tr>
+        <tr>
+            <td>x86 Executable:</td>
+            <td><a href="air3/air.exe">air.exe</a> (53k)</td>
+        </tr>
+    </table>
+
+    <p>
+        <font size="2" face="Arial,Helvetica">Stephen Bacon</font><font size="2" face="Arial,Helvetica">
+            (<a href="mailto:rad@stevebacon.org">rad@stevebacon.org</a>) created a version
+            for the Palm Pilot using CASL - the Compact Application Solution Language:
+        </font>
+    </p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Palm Pilot:</td>
+            <td><a href="palm/radpilot.zip">RadPilot.zip</a> (191k)</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <p>Improved Solution 2<strong>:</strong></p>
+
+    <p>
+        I was pointed to <font color="#000000" size="2" face="Arial">
+            <a href="http://usatoday.com/weather/wworks0.htm">http://usatoday.com/weather/wworks0.htm</a>
+            for some simpler calculations that did not require table lookups. This is what I now have
+            programmed into my calculator! No more bulky laptop needed!
+        </font>
+    </p>
+
+    <p>
+        <font color="#000000" size="2" face="Arial">
+            I have included some text from their site.
+            At the time of this writing, their site had no copyright notices, so I hope it is okay to
+            post information from their site here.
+        </font>
+    </p>
+
+    <p>
+        <font color="#000000" size="2" face="Arial">
+            I still have an x86 version exe you can use, or a
+            spreadsheet which shows the formulas as does the .cpp file. The word doc is a compilation
+            of the background text for all the formulas. Enjoy.
+        </font>
+    </p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Source Code:</td>
+            <td><a href="air2/air.cpp">air.cpp</a> (6k)</td>
+            <td><a href="air2/airsrc.zip">airsrc.zip</a> (2k)</td>
+        </tr>
+        <tr>
+            <td>x86 Executable:</td>
+            <td><a href="air2/air.exe">air.exe</a> (58k)</td>
+            <td><a href="air2/airexe.zip">airexe.zip</a> (28k)</td>
+        </tr>
+        <tr>
+            <td>Word 97 doc:</td>
+            <td><a href="air2/airdensity.doc">airdensity.doc</a> (102k)</td>
+            <td><a href="air2/airdoc.zip">airdoc.zip</a> (20k)</td>
+        </tr>
+        <tr>
+            <td>Excel 97 xls:</td>
+            <td><a href="air2/airdensity.xls">airdensity.xls</a> (21k)</td>
+            <td><a href="air2/airxls.zip">airxls.zip</a> (5k)</td>
+        </tr>
+    </table>
+
+    <p>
+        <font size="2" face="Arial,Helvetica">
+            Brad Turner (<a href="mailto:mbt@3Com.Com|">mbt@3Com.Com</a>)
+            once again made some changes so this works on a Mac. Below are his two Macintosh self
+            extracting archive files:
+        </font>
+    </p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Mac Source Code:</td>
+            <td><a href="air2/mac/AirDensitySrc.sea.bin">AirDensitySrc.sea</a> (23k)</td>
+        </tr>
+        <tr>
+            <td>Mac Executable:</td>
+            <td><a href="air2/mac/AirDensity.sea.bin">AirDensity</a> (41k)</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <p>Original Solution #1:</p>
+
+    <p>
+        I found my dew point calculations on the <a href="http://www.crest.org/efficiency/strawbale-list-archive/9602/msg00226.html">web</a>.
+        Excerpts from this message are in my source code below. I used a <em>
+            Road Racing World
+            &amp; Motorcycle Technology
+        </em> article written by Doug Walby for my air density
+        calculation. As he shows, this is just simple scientific calculations.
+    </p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Source Code:</td>
+            <td><a href="air.cpp">air.cpp</a> (10k)</td>
+            <td><a href="airsrc.zip">airsrc.zip</a> (3k)</td>
+        </tr>
+        <tr>
+            <td>x86 Executable:</td>
+            <td><a href="air.exe">air.exe</a> (53k)</td>
+            <td><a href="airexe.zip">airexe.zip</a> (25k)</td>
+        </tr>
+    </table>
+
+    <p>
+        <font size="2" face="Arial,Helvetica">
+            Brad Turner (<a href="mailto:mbt@3Com.Com|">mbt@3Com.Com</a>)
+            made some changes so this works on a Mac. Below are his two Macintosh self extracting
+            archive files:
+        </font>
+    </p>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <td>Mac Source Code:</td>
+            <td><a href="mac/AirDensitySrc.sea.bin">AirDensitySrc.sea</a> (28k)</td>
+        </tr>
+        <tr>
+            <td>Mac Executable:</td>
+            <td><a href="mac/AirDensity.sea.bin">AirDensity</a> (45k)</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <p><a href="../kory.htm">Back to Kory's main page</a></p>
+
+    <hr>
+
+    <h5 align="center">
+        <font color="#000000">
+            Copyright &copy; <a href="../contactkory.html">
+                Kory
+                Gill
+            </a>.
+        </font>
+    </h5>
+</body>
+</html>

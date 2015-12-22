@@ -1,0 +1,141 @@
+﻿<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+    <title>Air Density Calculation (for RPN calculator)</title>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-54114972-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+<body background="../images/background/kory250gp-97-background.gif">
+
+    <h1 align="center"><font color="#000000"><em>Air Density Calculation</em></font></h1>
+
+    <p align="center"><font color="#000000"><em>last updated 1/7/99</em></font></p>
+
+    <hr>
+
+    <p>Here's the formula used:</p>
+
+    <p>
+        StdAirDensity = 1.22556 and is defined at 59.0F degrees,&nbsp; 0.0% humidity, and 29.92
+        inches on the barometer<br>
+        Temp_c&nbsp;&nbsp;&nbsp; = (Temp-32.0) * 5.0 / 9.0;<br>
+        Temp_k&nbsp;&nbsp;&nbsp; = Temp_c + 273.0;<br>
+        Baro_mb = Barometer / (29.92 / 1013.0);<br>
+        Baro_pa = Baro_mb * 100.0;<br>
+        SaturationPressure_mb = 6.11 * pow(10,(7.5*Temp_c)/(237.7+Temp_c));<br>
+        VaporPressure_mb = Humidity * SaturationPressure_mb / 100.0;<br>
+        TempVirtual_k = Temp_k / (1.0 - (VaporPressure_mb/Baro_mb)*(1.-0.622));<br>
+        // D = P/(T*R)<br>
+        AirDensity = Baro_pa / (TempVirtual_k*GasConstant);<br>
+        % Std Density = AirDensity/StdAirDensity*100<br>
+    </p>
+
+    <p>
+        Just so I don't lose the small amount of work I did to program this in my RPN
+        calculator, I have listed my &quot;program&quot; here.
+    </p>
+
+    <p>Legend: &lt; (recall), &gt; (store), = (enter), ? (input), -&gt; (covert to)</p>
+
+    <p>
+        lbl d<br>
+        t?<br>
+        h?<br>
+        b?<br>
+        &lt;t<br>
+        -&gt; degrees celcius<br>
+        &gt;c (celcius)<br>
+        273<br>
+        +<br>
+        &gt;k (kelvin)<br>
+        &lt;b<br>
+        =<br>
+        29.92<br>
+        =<br>
+        1013<br>
+        /<br>
+        /<br>
+        &gt;m (barometer, millibars)<br>
+        100<br>
+        x<br>
+        &gt;p (barometer, pascals)<br>
+        6.11<br>
+        =<br>
+        &lt;c<br>
+        =<br>
+        7.5<br>
+        x<br>
+        =<br>
+        &lt;c<br>
+        =<br>
+        237.7<br>
+        +<br>
+        /<br>
+        10x (to the 10th power)<br>
+        x<br>
+        &gt;s (saturation pressure)<br>
+        =<br>
+        &lt;h<br>
+        x<br>
+        100<br>
+        /<br>
+        &gt;v (vapor pressure)<br>
+        &lt;k<br>
+        =<br>
+        1<br>
+        =<br>
+        &lt;v<br>
+        =<br>
+        &lt;m<br>
+        /<br>
+        =<br>
+        0.378<br>
+        x<br>
+        -<br>
+        /<br>
+        &gt;l (virtual temp)<br>
+        &lt;p<br>
+        =<br>
+        &lt;l<br>
+        =<br>
+        287<br>
+        x<br>
+        /<br>
+        &gt;d (air density)<br>
+        1.22556<br>
+        /<br>
+        100<br>
+        x<br>
+        &gt;e (% std air density)<br>
+        rtn
+    </p>
+
+    <hr>
+
+    <p><a href="../kory.htm">Back to Kory's main page</a></p>
+
+    <hr>
+
+    <h5 align="center">
+        <font color="#000000">
+            Copyright &copy; <a href="../contactkory.html">
+                Kory
+                Gill
+            </a>.
+        </font>
+    </h5>
+</body>
+</html>
