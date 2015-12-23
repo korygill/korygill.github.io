@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Calling an external tool from Visual Studio | Panoptic (păn-ŏp′tĭk)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Calling an external tool from Visual Studio">
+<meta property="og:url" content="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/index.html">
+<meta property="og:site_name" content="Panoptic (păn-ŏp′tĭk)">
+<meta property="og:description" content="I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position">
+<meta property="og:image" content="http://i.stack.imgur.com/de0oz.png">
+<meta property="og:image" content="http://i.stack.imgur.com/vHzcK.png">
+<meta property="og:image" content="http://i.stack.imgur.com/R9qDw.png">
+<meta property="og:image" content="http://i.stack.imgur.com/4ykVp.png">
+<meta property="og:updated_time" content="2015-12-23T18:34:12.703Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calling an external tool from Visual Studio">
+<meta name="twitter:description" content="I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position">
+  
+    <link rel="alternative" href="/atom.xml" title="Panoptic (păn-ŏp′tĭk)" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/panoptic/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-54114972-3', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner">
+	<img src="css/images/banner.jpg" style="display:none;" alt=""/>
+  </div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Panoptic (păn-ŏp′tĭk)</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A blog about everything and anything</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/panoptic">Home</a>
+        
+          <a class="main-nav-link" href="/panoptic/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://korygill.net/panoptic"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Calling-an-external-tool-from-Visual-Studio" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" class="article-date">
+  <time datetime="2015-12-23T17:57:13.000Z" itemprop="datePublished">2015-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/panoptic/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Calling an external tool from Visual Studio
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position as the Visual Studio editor was at.</p>
+<p>You can get a solution to this that takes 2 steps, both of which take little time once you have your search results.  <code>Double-click the result</code>, <code>press ctrl-shift-alt-L</code> (can be changed of course).</p>
+
+<p>The steps below are verbose to show as much as possible so everyone can understand the steps and modify accordingly.</p>
+
+<p><strong>Create a cmd file that will launch notepad++ with file, line, and column arguments</strong></p>
+
+<p>Save the code below in <code>d:\util\startnppwith3args.cmd</code></p>
+
+<pre><code>setlocal
+set _file=%0
+set _line=%1
+set _column=%2
+set _line=%_line:"=%
+set _column=%_column:"=%
+: remember to use "" as first arg as blank title so we call npp properly :)
+start "" "F:\Program Files (x86)\Notepad++\notepad++.exe" -multiInst -nosession -n%_line% -c%_column% %_file%
+pause
+endlocal
+</code></pre>
+
+<p><strong>Create external tool to call startnppwith3args.cmd</strong></p>
+
+<p><code>tools | External Tools…</code></p>
+
+<p><a href="http://i.stack.imgur.com/de0oz.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/de0oz.png" alt="enter image description here"></a></p>
+
+<p><em>Remember the position of this command, 3 in this case.</em></p>
+
+<p><strong>Create a keyboard shortcut to “command3”</strong></p>
+
+<p><code>tools | Options | Keyboard</code> and search for <code>externalcommand</code></p>
+
+<p><a href="http://i.stack.imgur.com/vHzcK.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/vHzcK.png" alt="enter image description here"></a></p>
+
+<p>Assign your desired key combination to this command <code>ctrl-shift-alt L</code> for example.</p>
+
+<p><strong>Verify your command is as expected on the Tools menu</strong></p>
+
+<p><a href="http://i.stack.imgur.com/R9qDw.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/R9qDw.png" alt="enter image description here"></a></p>
+
+<p><strong>Now put it all into action</strong></p>
+
+<ul><br><li>Open a file in Visual Studio</li><br><li>Search for something in the file</li><br><li>Double-click desired search result</li><br><li>Press <code>ctrl-shift-alt L</code></li><br></ul>
+
+<p>Notepad++ opens up the file on the line and column for the search result!</p>
+
+<p><a href="http://i.stack.imgur.com/4ykVp.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/4ykVp.png" alt="enter image description here"></a></p>
+
+<p><strong>What’s left?</strong></p>
+
+<ul><br><li>Take the <code>pause</code> out of the cmd file as it was used just for debugging purposes.</li><br><li>decide if you want <code>-multiInst -nosession</code> arguments</li><br><li>Take a look at <a href="https://msdn.microsoft.com/en-us/library/ekbzk5f8(v=vs.120).aspx" rel="external" target="_blank">Arguments for External Tools</a> for all variables that are assigned when you launch an external tool.</li><br></ul>
+
+<p><strong>Conclusion</strong></p>
+
+<p>This was in interesting question, and an area I had not explored before.  I might use this technique myself and for other purposes.</p>
+
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" data-id="ciij4oo1y0000m0y49fc3r6mi" class="article-share-link">Share</a>
+      
+        <a href="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Notepad/">Notepad++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Visual-Studio/">Visual Studio</a></li></ul>
+
+    </footer>
+	
+	<div class="aticle-footer">
+	<!-- todo: mail chimp code here -->
+	</div>
+	
+	
+	<section id="comments">
+	  <div id="disqus_thread">
+		<noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	  </div>
+	</section>
+	
+	
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/panoptic/2015/12/Is-this-thing-on/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Is this thing on</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/panoptic/categories/General/">General</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/panoptic/categories/Programming/">Programming</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/Notepad/">Notepad++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/general/">general</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/panoptic/tags/Notepad/" style="font-size: 10px;">Notepad++</a> <a href="/panoptic/tags/Visual-Studio/" style="font-size: 10px;">Visual Studio</a> <a href="/panoptic/tags/general/" style="font-size: 20px;">general</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/panoptic/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/">Calling an external tool from Visual Studio</a>
+          </li>
+        
+          <li>
+            <a href="/panoptic/2015/12/Is-this-thing-on/">Is this thing on</a>
+          </li>
+        
+          <li>
+            <a href="/panoptic/2015/12/getting-ready/">Getting ready to publish</a>
+          </li>
+        
+          <li>
+            <a href="/panoptic/2015/12/adding-to-the-tubes/">Adding to the tubes</a>
+          </li>
+        
+          <li>
+            <a href="/panoptic/2015/12/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Kory Gill<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/panoptic" class="mobile-nav-link">Home</a>
+  
+    <a href="/panoptic/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'panopticblog';
+  
+  var disqus_url = 'http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/panoptic/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/panoptic/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/panoptic/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
