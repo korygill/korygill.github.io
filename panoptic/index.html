@@ -80,6 +80,115 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-Calling-an-external-tool-from-Visual-Studio" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" class="article-date">
+  <time datetime="2015-12-23T17:57:13.000Z" itemprop="datePublished">2015-12-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/panoptic/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/">Calling an external tool from Visual Studio</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position as the Visual Studio editor was at.</p>
+<p>You can get a solution to this that takes 2 steps, both of which take little time once you have your search results.  <code>Double-click the result</code>, <code>press ctrl-shift-alt-L</code> (can be changed of course).</p>
+
+<p>The steps below are verbose to show as much as possible so everyone can understand the steps and modify accordingly.</p>
+
+<p><strong>Create a cmd file that will launch notepad++ with file, line, and column arguments</strong></p>
+
+<p>Save the code below in <code>d:\util\startnppwith3args.cmd</code></p>
+
+<pre><code>setlocal
+set _file=%0
+set _line=%1
+set _column=%2
+set _line=%_line:"=%
+set _column=%_column:"=%
+: remember to use "" as first arg as blank title so we call npp properly :)
+start "" "F:\Program Files (x86)\Notepad++\notepad++.exe" -multiInst -nosession -n%_line% -c%_column% %_file%
+pause
+endlocal
+</code></pre>
+
+<p><strong>Create external tool to call startnppwith3args.cmd</strong></p>
+
+<p><code>tools | External Tools…</code></p>
+
+<p><a href="http://i.stack.imgur.com/de0oz.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/de0oz.png" alt="enter image description here"></a></p>
+
+<p><em>Remember the position of this command, 3 in this case.</em></p>
+
+<p><strong>Create a keyboard shortcut to “command3”</strong></p>
+
+<p><code>tools | Options | Keyboard</code> and search for <code>externalcommand</code></p>
+
+<p><a href="http://i.stack.imgur.com/vHzcK.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/vHzcK.png" alt="enter image description here"></a></p>
+
+<p>Assign your desired key combination to this command <code>ctrl-shift-alt L</code> for example.</p>
+
+<p><strong>Verify your command is as expected on the Tools menu</strong></p>
+
+<p><a href="http://i.stack.imgur.com/R9qDw.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/R9qDw.png" alt="enter image description here"></a></p>
+
+<p><strong>Now put it all into action</strong></p>
+
+<ul><br><li>Open a file in Visual Studio</li><br><li>Search for something in the file</li><br><li>Double-click desired search result</li><br><li>Press <code>ctrl-shift-alt L</code></li><br></ul>
+
+<p>Notepad++ opens up the file on the line and column for the search result!</p>
+
+<p><a href="http://i.stack.imgur.com/4ykVp.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/4ykVp.png" alt="enter image description here"></a></p>
+
+<p><strong>What’s left?</strong></p>
+
+<ul><br><li>Take the <code>pause</code> out of the cmd file as it was used just for debugging purposes.</li><br><li>decide if you want <code>-multiInst -nosession</code> arguments</li><br><li>Take a look at <a href="https://msdn.microsoft.com/en-us/library/ekbzk5f8(v=vs.120).aspx" rel="external" target="_blank">Arguments for External Tools</a> for all variables that are assigned when you launch an external tool.</li><br></ul>
+
+<p><strong>Conclusion</strong></p>
+
+<p>This was in interesting question, and an area I had not explored before.  I might use this technique myself and for other purposes.</p>
+
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" data-id="ciij4oo1y0000m0y49fc3r6mi" class="article-share-link">Share</a>
+      
+        <a href="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Notepad/">Notepad++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Visual-Studio/">Visual Studio</a></li></ul>
+
+    </footer>
+	
+	<div class="aticle-footer">
+	<!-- todo: mail chimp code here -->
+	</div>
+	
+	
+	
+  </div>
+  
+</article>
+
+  
     <article id="post-Is-this-thing-on" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/panoptic/2015/12/Is-this-thing-on/" class="article-date">
@@ -109,7 +218,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://korygill.net/panoptic/2015/12/Is-this-thing-on/" data-id="ciieanyuw000bucy4418lpog6" class="article-share-link">Share</a>
+      <a data-url="http://korygill.net/panoptic/2015/12/Is-this-thing-on/" data-id="ciij4oo2n000im0y4983401oe" class="article-share-link">Share</a>
       
         <a href="http://korygill.net/panoptic/2015/12/Is-this-thing-on/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -158,7 +267,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://korygill.net/panoptic/2015/12/getting-ready/" data-id="ciieanyuk0005ucy4r9y94mat" class="article-share-link">Share</a>
+      <a data-url="http://korygill.net/panoptic/2015/12/getting-ready/" data-id="ciij4oo2c000cm0y4jvq906xz" class="article-share-link">Share</a>
       
         <a href="http://korygill.net/panoptic/2015/12/getting-ready/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -211,7 +320,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://korygill.net/panoptic/2015/12/adding-to-the-tubes/" data-id="ciieanyup0008ucy4b4l1t9ft" class="article-share-link">Share</a>
+      <a data-url="http://korygill.net/panoptic/2015/12/adding-to-the-tubes/" data-id="ciij4oo2j000fm0y42ps86yyn" class="article-share-link">Share</a>
       
         <a href="http://korygill.net/panoptic/2015/12/adding-to-the-tubes/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -270,7 +379,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://korygill.net/panoptic/2015/12/hello-world/" data-id="ciieanyua0000ucy45rngrnhn" class="article-share-link">Share</a>
+      <a data-url="http://korygill.net/panoptic/2015/12/hello-world/" data-id="ciij4oo280007m0y42fh8vnef" class="article-share-link">Share</a>
       
         <a href="http://korygill.net/panoptic/2015/12/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -299,7 +408,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/panoptic/categories/General/">General</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/panoptic/categories/General/">General</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/panoptic/categories/Programming/">Programming</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -308,7 +417,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/general/">general</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/Notepad/">Notepad++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/panoptic/tags/general/">general</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -317,7 +426,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/panoptic/tags/general/" style="font-size: 10px;">general</a>
+      <a href="/panoptic/tags/Notepad/" style="font-size: 10px;">Notepad++</a> <a href="/panoptic/tags/Visual-Studio/" style="font-size: 10px;">Visual Studio</a> <a href="/panoptic/tags/general/" style="font-size: 20px;">general</a>
     </div>
   </div>
 
@@ -326,7 +435,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/panoptic/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/panoptic/archives/2015/12/">December 2015</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -336,6 +445,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/">Calling an external tool from Visual Studio</a>
+          </li>
         
           <li>
             <a href="/panoptic/2015/12/Is-this-thing-on/">Is this thing on</a>
