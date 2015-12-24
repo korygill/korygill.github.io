@@ -97,10 +97,12 @@ endlocal
     <link href="http://korygill.net/panoptic/2015/12/Is-this-thing-on/"/>
     <id>http://korygill.net/panoptic/2015/12/Is-this-thing-on/</id>
     <published>2015-12-20T08:49:01.000Z</published>
-    <updated>2015-12-20T08:55:24.862Z</updated>
+    <updated>2015-12-24T01:18:32.223Z</updated>
     <content type="html"><![CDATA[<p>Just learning how to use hexo to show an image.  Works on the site, but not<br>in the markdown editor I am using (atom at the moment).</p>
 <img src="/panoptic/2015/12/Is-this-thing-on/kory-twitter.png" alt="An image." title="An image.">
 <p>Hmmm.</p>
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>Just learning how to use hexo to show an image.  Works on the site, but not<br>in the markdown editor I am using (atom at the moment).</p]]>
@@ -113,8 +115,10 @@ endlocal
     <link href="http://korygill.net/panoptic/2015/12/getting-ready/"/>
     <id>http://korygill.net/panoptic/2015/12/getting-ready/</id>
     <published>2015-12-19T01:28:21.000Z</published>
-    <updated>2015-12-20T08:25:26.482Z</updated>
+    <updated>2015-12-24T01:18:27.190Z</updated>
     <content type="html"><![CDATA[<p>It’s been a busy week getting the website set up, some work to make it look halfway decent, and finally to determine how best I want to publish this blog. I think I have things just about the way I like it, so some informative commentary should start flowing soon.</p>
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>It’s been a busy week getting the website set up, some work to make it look halfway decent, and finally to determine how best I want to p]]>
@@ -131,10 +135,12 @@ endlocal
     <link href="http://korygill.net/panoptic/2015/12/adding-to-the-tubes/"/>
     <id>http://korygill.net/panoptic/2015/12/adding-to-the-tubes/</id>
     <published>2015-12-17T01:28:21.000Z</published>
-    <updated>2015-12-20T08:45:24.056Z</updated>
+    <updated>2015-12-24T01:18:24.163Z</updated>
     <content type="html"><![CDATA[<p>The internet needs more content</p>
 <p>I am starting a blog to capture some of the things I have been meaning to share for a long time. I will be adding new posts from several categories over the next few weeks to <em>catch up</em> on some backlog items.</p>
 <p>Enjoy.</p>
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>The internet needs more content</p>
@@ -152,7 +158,7 @@ endlocal
     <link href="http://korygill.net/panoptic/2015/12/hello-world/"/>
     <id>http://korygill.net/panoptic/2015/12/hello-world/</id>
     <published>2015-12-15T01:28:21.000Z</published>
-    <updated>2015-12-20T08:20:08.480Z</updated>
+    <updated>2015-12-24T01:18:29.647Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
@@ -162,6 +168,8 @@ endlocal
 <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
 <h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
