@@ -4,7 +4,7 @@
   <subtitle><![CDATA[A blog about everything and anything]]></subtitle>
   <link href="/panoptic/atom.xml" rel="self"/>
   <link href="http://korygill.net/panoptic/"/>
-  <updated>2015-12-23T18:34:12.703Z</updated>
+  <updated>2015-12-27T01:58:06.772Z</updated>
   <id>http://korygill.net/panoptic/</id>
   
   <author>
@@ -13,6 +13,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Resolving certificate errors building Windows Store Apps]]></title>
+    <link href="http://korygill.net/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/"/>
+    <id>http://korygill.net/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/</id>
+    <published>2015-12-27T01:46:09.000Z</published>
+    <updated>2015-12-27T01:58:06.772Z</updated>
+    <content type="html"><![CDATA[<p>I came back to a project that I had not built for some time, and received the following error:</p>
+<pre><code>The Publisher attribute of the Identity element in the app manifest must 
+have the value of the Publisher ID value from your developer account:
+{my dev account id}.
+</code></pre><p>The help link associated with the error in Visual Studio was not helpful. I won’t post it here because no one should follow it, and it should not get any hits and increase its popularity by search engines.</p>
+<p>OK, so how do you solve this issue?  Don’t try to regenerate the certificate yourself from the App Manifest Designer.  </p>
+<pre><code>Instead, *re-associate* your app with the Windows Store
+and you will get an updated pfx file with the correct info.
+</code></pre><p>This issue seems complicated further by the combining of stores for Windows and Windows Phone apps, because now my certificate as a GUID for a common name instead of the Publisher ID which would be a <em>human readable string</em>.</p>
+<p>Live and learn…</p>
+<p><br></p>
+<div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>I came back to a project that I had not built for some time, and received the following error:</p>
+<pre><code>The Publisher attribute of ]]>
+    </summary>
+    
+      <category term="Certificates" scheme="http://korygill.net/panoptic/tags/Certificates/"/>
+    
+      <category term="Universal Apps" scheme="http://korygill.net/panoptic/tags/Universal-Apps/"/>
+    
+      <category term="Visual Studio" scheme="http://korygill.net/panoptic/tags/Visual-Studio/"/>
+    
+      <category term="Windows" scheme="http://korygill.net/panoptic/tags/Windows/"/>
+    
+      <category term="Programming" scheme="http://korygill.net/panoptic/categories/Programming/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Calling an external tool from Visual Studio]]></title>

@@ -3,22 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Calling an external tool from Visual Studio | Panoptic (păn-ŏp′tĭk)</title>
+  <title>Resolving certificate errors building Windows Store Apps | Panoptic (păn-ŏp′tĭk)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position">
+  <meta name="description" content="I came back to a project that I had not built for some time, and received the following error:
+The Publisher attribute of the Identity element in the app manifest must 
+have the value of the Publisher">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Calling an external tool from Visual Studio">
-<meta property="og:url" content="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/index.html">
+<meta property="og:title" content="Resolving certificate errors building Windows Store Apps">
+<meta property="og:url" content="http://korygill.net/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/index.html">
 <meta property="og:site_name" content="Panoptic (păn-ŏp′tĭk)">
-<meta property="og:description" content="I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position">
-<meta property="og:image" content="http://i.stack.imgur.com/de0oz.png">
-<meta property="og:image" content="http://i.stack.imgur.com/vHzcK.png">
-<meta property="og:image" content="http://i.stack.imgur.com/R9qDw.png">
-<meta property="og:image" content="http://i.stack.imgur.com/4ykVp.png">
-<meta property="og:updated_time" content="2015-12-23T18:34:12.703Z">
+<meta property="og:description" content="I came back to a project that I had not built for some time, and received the following error:
+The Publisher attribute of the Identity element in the app manifest must 
+have the value of the Publisher">
+<meta property="og:updated_time" content="2015-12-27T01:58:06.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Calling an external tool from Visual Studio">
-<meta name="twitter:description" content="I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position">
+<meta name="twitter:title" content="Resolving certificate errors building Windows Store Apps">
+<meta name="twitter:description" content="I came back to a project that I had not built for some time, and received the following error:
+The Publisher attribute of the Identity element in the app manifest must 
+have the value of the Publisher">
   
     <link rel="alternative" href="/atom.xml" title="Panoptic (păn-ŏp′tĭk)" type="application/atom+xml">
   
@@ -83,10 +85,10 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Calling-an-external-tool-from-Visual-Studio" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Resolving-certificate-errors-building-Windows-Store-Apps" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" class="article-date">
-  <time datetime="2015-12-23T17:57:13.000Z" itemprop="datePublished">2015-12-23</time>
+    <a href="/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/" class="article-date">
+  <time datetime="2015-12-27T01:46:09.000Z" itemprop="datePublished">2015-12-26</time>
 </a>
     
   <div class="article-category">
@@ -101,7 +103,7 @@ ga('send', 'pageview');
         
   
     <h1 class="article-title" itemprop="name">
-      Calling an external tool from Visual Studio
+      Resolving certificate errors building Windows Store Apps
     </h1>
   
 
@@ -109,75 +111,28 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>I recently helped someone who wanted to open an external editor from Visual Studio. Below are the steps I suggested to map a keyboard shortcut to open Notepad++ to the same line/column cursor position as the Visual Studio editor was at.</p>
-<p>You can get a solution to this that takes 2 steps, both of which take little time once you have your search results.  <code>Double-click the result</code>, <code>press ctrl-shift-alt-L</code> (can be changed of course).</p>
-
-<p>The steps below are verbose to show as much as possible so everyone can understand the steps and modify accordingly.</p>
-
-<p><strong>Create a cmd file that will launch notepad++ with file, line, and column arguments</strong></p>
-
-<p>Save the code below in <code>d:\util\startnppwith3args.cmd</code></p>
-
-<pre><code>setlocal
-set _file=%0
-set _line=%1
-set _column=%2
-set _line=%_line:"=%
-set _column=%_column:"=%
-: remember to use "" as first arg as blank title so we call npp properly :)
-start "" "F:\Program Files (x86)\Notepad++\notepad++.exe" -multiInst -nosession -n%_line% -c%_column% %_file%
-pause
-endlocal
-</code></pre>
-
-<p><strong>Create external tool to call startnppwith3args.cmd</strong></p>
-
-<p><code>tools | External Tools…</code></p>
-
-<p><a href="http://i.stack.imgur.com/de0oz.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/de0oz.png" alt="enter image description here"></a></p>
-
-<p><em>Remember the position of this command, 3 in this case.</em></p>
-
-<p><strong>Create a keyboard shortcut to “command3”</strong></p>
-
-<p><code>tools | Options | Keyboard</code> and search for <code>externalcommand</code></p>
-
-<p><a href="http://i.stack.imgur.com/vHzcK.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/vHzcK.png" alt="enter image description here"></a></p>
-
-<p>Assign your desired key combination to this command <code>ctrl-shift-alt L</code> for example.</p>
-
-<p><strong>Verify your command is as expected on the Tools menu</strong></p>
-
-<p><a href="http://i.stack.imgur.com/R9qDw.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/R9qDw.png" alt="enter image description here"></a></p>
-
-<p><strong>Now put it all into action</strong></p>
-
-<ul><br><li>Open a file in Visual Studio</li><br><li>Search for something in the file</li><br><li>Double-click desired search result</li><br><li>Press <code>ctrl-shift-alt L</code></li><br></ul>
-
-<p>Notepad++ opens up the file on the line and column for the search result!</p>
-
-<p><a href="http://i.stack.imgur.com/4ykVp.png" rel="external" target="_blank"><img src="http://i.stack.imgur.com/4ykVp.png" alt="enter image description here"></a></p>
-
-<p><strong>What’s left?</strong></p>
-
-<ul><br><li>Take the <code>pause</code> out of the cmd file as it was used just for debugging purposes.</li><br><li>decide if you want <code>-multiInst -nosession</code> arguments</li><br><li>Take a look at <a href="https://msdn.microsoft.com/en-us/library/ekbzk5f8(v=vs.120).aspx" rel="external" target="_blank">Arguments for External Tools</a> for all variables that are assigned when you launch an external tool.</li><br></ul>
-
-<p><strong>Conclusion</strong></p>
-
-<p>This was in interesting question, and an area I had not explored before.  I might use this technique myself and for other purposes.</p>
-
+        <p>I came back to a project that I had not built for some time, and received the following error:</p>
+<pre><code>The Publisher attribute of the Identity element in the app manifest must 
+have the value of the Publisher ID value from your developer account:
+{my dev account id}.
+</code></pre><p>The help link associated with the error in Visual Studio was not helpful. I won’t post it here because no one should follow it, and it should not get any hits and increase its popularity by search engines.</p>
+<p>OK, so how do you solve this issue?  Don’t try to regenerate the certificate yourself from the App Manifest Designer.  </p>
+<pre><code>Instead, *re-associate* your app with the Windows Store
+and you will get an updated pfx file with the correct info.
+</code></pre><p>This issue seems complicated further by the combining of stores for Windows and Windows Phone apps, because now my certificate as a GUID for a common name instead of the Publisher ID which would be a <em>human readable string</em>.</p>
+<p>Live and learn…</p>
 <p><br></p>
 <div><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br><!-- korygill.net --><br><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7382829222089334" data-ad-slot="3625691003" data-ad-format="auto"></ins><br><script><br>(adsbygoogle = window.adsbygoogle || []).push({});<br></script><br></div>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" data-id="ciinvwlpv0000zsy4qi3hc6on" class="article-share-link">Share</a>
+      <a data-url="http://korygill.net/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/" data-id="ciinvwlqp000izsy44aftfk9h" class="article-share-link">Share</a>
       
-        <a href="http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://korygill.net/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Notepad/">Notepad++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Visual-Studio/">Visual Studio</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Certificates/">Certificates</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Universal-Apps/">Universal Apps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Visual-Studio/">Visual Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/panoptic/tags/Windows/">Windows</a></li></ul>
 
     </footer>
 	
@@ -198,19 +153,10 @@ endlocal
     
 <nav id="article-nav">
   
-    <a href="/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Resolving certificate errors building Windows Store Apps
-        
-      </div>
-    </a>
   
-  
-    <a href="/panoptic/2015/12/Is-this-thing-on/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Is this thing on</div>
+      <div class="article-nav-title">Calling an external tool from Visual Studio</div>
     </a>
   
 </nav>
@@ -329,7 +275,7 @@ endlocal
 <script>
   var disqus_shortname = 'panopticblog';
   
-  var disqus_url = 'http://korygill.net/panoptic/2015/12/Calling-an-external-tool-from-Visual-Studio/';
+  var disqus_url = 'http://korygill.net/panoptic/2015/12/Resolving-certificate-errors-building-Windows-Store-Apps/';
   
   (function(){
     var dsq = document.createElement('script');
