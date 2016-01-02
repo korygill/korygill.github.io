@@ -67,9 +67,9 @@ a[target='_blank']:after {content: url(/img/openinnewwindowx8.png); margin-left:
     margin-bottom:  16px;
 }
 
-.aboutitems li a img {
+/*.aboutitems li a img {
     width: 48px;
-}
+}*/
 
 .aboutitems li a span {
     font-size: 18px;
